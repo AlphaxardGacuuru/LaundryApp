@@ -10,127 +10,149 @@ import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
 
 const Register = () => {
-    const { register } = useAuth({
-        middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
-    })
+	const { register } = useAuth({
+		middleware: 'guest',
+		redirectIfAuthenticated: '/dashboard',
+	})
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [phone, setPhone] = useState('')
+	const [password, setPassword] = useState('')
+	const [passwordConfirmation, setPasswordConfirmation] = useState('')
+	const [errors, setErrors] = useState([])
 
-    const submitForm = event => {
-        event.preventDefault()
+	const submitForm = event => {
+		event.preventDefault()
 
-        register({
-            name,
-            email,
-            password,
-            password_confirmation: passwordConfirmation,
-            setErrors,
-        })
-    }
+		register({
+			name,
+			email,
+			phone,
+			password,
+			password_confirmation: passwordConfirmation,
+			setErrors,
+		})
+	}
 
-    return (
-        <GuestLayout>
-            <AuthCard
-                logo={
-                    <Link href="/">
-                        <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                    </Link>
-                }>
-                <form onSubmit={submitForm}>
-                    {/* Name */}
-                    <div>
-                        <Label htmlFor="name">Name</Label>
+	return (
+		<div className="row">
+			<div className="col-sm-4"></div>
+			<div className="col-sm-4">
+				<center className="mt-3">
+					<Link href="/">
+						<ApplicationLogo className="w-25 h-25 fill-current text-gray-500" />
+					</Link>
+				</center>
+				<div className="contact-form">
+					<form className="mb-5" onSubmit={submitForm}>
+						{/* Name */}
+						<div>
+							<Label htmlFor="name">Name</Label>
 
-                        <Input
-                            id="name"
-                            type="text"
-                            value={name}
-                            className="block mt-1 w-full"
-                            onChange={event => setName(event.target.value)}
-                            required
-                            autoFocus
-                        />
+							<Input
+								id="name"
+								type="text"
+								value={name}
+								className="form-control"
+								onChange={event => setName(event.target.value)}
+								required
+								autoFocus
+							/>
 
-                        <InputError messages={errors.name} className="mt-2" />
-                    </div>
+							<InputError messages={errors.name} className="mt-2 text-danger" />
+						</div>
 
-                    {/* Email Address */}
-                    <div className="mt-4">
-                        <Label htmlFor="email">Email</Label>
+						{/* Email Address */}
+						<div className="mt-4">
+							<Label htmlFor="email">Email</Label>
 
-                        <Input
-                            id="email"
-                            type="email"
-                            value={email}
-                            className="block mt-1 w-full"
-                            onChange={event => setEmail(event.target.value)}
-                            required
-                        />
+							<Input
+								id="email"
+								type="email"
+								value={email}
+								className="form-control"
+								onChange={event => setEmail(event.target.value)}
+								required
+							/>
 
-                        <InputError messages={errors.email} className="mt-2" />
-                    </div>
+							<InputError messages={errors.email} className="mt-2 text-danger" />
+						</div>
 
-                    {/* Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+						{/* Phone */}
+						<div className="mt-4">
+							<Label htmlFor="phone">Phone</Label>
 
-                        <Input
-                            id="password"
-                            type="password"
-                            value={password}
-                            className="block mt-1 w-full"
-                            onChange={event => setPassword(event.target.value)}
-                            required
-                            autoComplete="new-password"
-                        />
+							<Input
+								id="phone"
+								type="phone"
+								value={phone}
+								className="form-control"
+								onChange={event => setPhone(event.target.value)}
+								required
+							/>
 
-                        <InputError
-                            messages={errors.password}
-                            className="mt-2"
-                        />
-                    </div>
+							<InputError messages={errors.phone} className="mt-2 text-danger" />
+						</div>
 
-                    {/* Confirm Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="passwordConfirmation">
-                            Confirm Password
-                        </Label>
+						{/* Password */}
+						<div className="mt-4">
+							<Label htmlFor="password">Password</Label>
 
-                        <Input
-                            id="passwordConfirmation"
-                            type="password"
-                            value={passwordConfirmation}
-                            className="block mt-1 w-full"
-                            onChange={event =>
-                                setPasswordConfirmation(event.target.value)
-                            }
-                            required
-                        />
+							<Input
+								id="password"
+								type="password"
+								value={password}
+								className="form-control"
+								onChange={event => setPassword(event.target.value)}
+								required
+								autoComplete="new-password"
+							/>
 
-                        <InputError
-                            messages={errors.password_confirmation}
-                            className="mt-2"
-                        />
-                    </div>
+							<InputError
+								messages={errors.password}
+								className="mt-2 text-danger"
+							/>
+						</div>
 
-                    <div className="flex items-center justify-end mt-4">
-                        <Link
-                            href="/login"
-                            className="underline text-sm text-gray-600 hover:text-gray-900">
-                            Already registered?
-                        </Link>
+						{/* Confirm Password */}
+						<div className="mt-4">
+							<Label htmlFor="passwordConfirmation">
+								Confirm Password
+							</Label>
 
-                        <Button className="ml-4">Register</Button>
-                    </div>
-                </form>
-            </AuthCard>
-        </GuestLayout>
-    )
+							<Input
+								id="passwordConfirmation"
+								type="password"
+								value={passwordConfirmation}
+								className="form-control"
+								onChange={event =>
+									setPasswordConfirmation(event.target.value)
+								}
+								required
+							/>
+
+							<InputError
+								messages={errors.password_confirmation}
+								className="mt-2 text-danger"
+							/>
+						</div>
+
+						<div className="d-flex justify-content-between mt-4">
+							<Link
+								href="/login"
+								className="underline text-sm text-gray-600 hover:text-gray-900">
+								Already registered?
+							</Link>
+
+							<button className="btn btn-primary rounded-0 ml-4">Register</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div className="col-sm-4"></div>
+		</div>
+	)
 }
 
 export default Register

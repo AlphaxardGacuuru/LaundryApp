@@ -48,7 +48,30 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'string|nullable|max:20',
+            'phone' => 'string|nullable|startsWith:0|min:10|max:10',
+            'type' => 'string|nullable',
+        ]);
+
+        /* Update profile */
+        $user = User::find($id);
+
+        if ($request->filled('name')) {
+            $user->name = $request->input('name');
+        }
+
+        if ($request->filled('phone')) {
+            $user->phone = $request->input('phone');
+        }
+
+        if ($request->filled('type')) {
+            $user->type = $request->input('type');
+        }
+
+        $user->save();
+
+        return response("Account updated", 200);
     }
 
     /**

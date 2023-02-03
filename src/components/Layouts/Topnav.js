@@ -3,7 +3,7 @@ import { useAuth } from '@/hooks/auth'
 
 const TopNav = () => {
 
-	const { user } = useAuth({ middleware: 'guest' })
+	const { user, logout } = useAuth({ middleware: 'guest' })
 
 	return (
 		<div id="MyElement" className="mb-5">
@@ -36,14 +36,14 @@ const TopNav = () => {
 											</> :
 											<>
 												{/* Avatar Dropdown */}
-												<Link href="/profile">
+												<Link href="/profile" className="display-4">
 													{user?.name}
 												</Link>
-												<Link href="/logout" legacyBehavior>
-													<a className="p-3 dropdown-item">
-														<h6>Logout</h6>
-													</a>
-												</Link>
+												<small className="text-white"
+													style={{ cursor: "pointer" }}
+													onClick={logout}>
+													Logout
+												</small>
 												{/* Avatar Dropdown End */}
 											</>
 										}
